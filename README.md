@@ -29,12 +29,20 @@ A modern, responsive Mobile Operating System & Insurance Multi-App Dashboard bui
 - **CSS3:** Modern CSS variables, glassmorphism, responsive viewport scaling, 3D transform card switcher.
 - **JavaScript (ES6):** State-driven multitasking engine, real-time clock, interactive modals and forms.
 
-## 🚀 How to Run
+## 📲 Direct Mobile Chrome Installation (PWA)
 
-Simply open `index.html` in any web browser or deploy directly to GitHub Pages:
-```bash
-# Clone the repository
-git clone https://github.com/reach-bhavesh/mobile-app.git
+This application is configured as a standalone **Progressive Web App (PWA)** with `manifest.json` and `sw.js`.
 
-# Open index.html in your browser
-```
+### How to Install on Mobile Phone:
+1. **GitHub Pages (Free Hosting):**
+   - In your GitHub repository: Go to **Settings** > **Pages**.
+   - Under **Build and deployment**, select `Deploy from a branch` and choose `main` / `root`.
+   - Your live app link will be: `https://reach-bhavesh.github.io/mobile-app/`
+2. **Open in Chrome on Android:**
+   - Open your link in Google Chrome on your phone.
+   - Tap the **3 dots (⋮)** in the top right corner.
+   - Tap **"Install app"** (or **"Add to Home screen"**).
+   - Tap **Install**.
+3. **Open as Native App:**
+   - The app icon will now appear directly on your smartphone screen alongside WhatsApp, Spotify, etc.
+   - It launches fullscreen with zero browser address bar, exactly like a native Android app!

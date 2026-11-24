@@ -3,8 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#0b1120">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="InsuranceOS">
   <title>Smart Insurance OS - Mobile Multi-App System</title>
+  
+  <!-- PWA Manifest & Icons -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,6 +36,9 @@
     </div>
     <div class="device-controls">
       <span class="preview-text"><i class="fa-solid fa-layer-group"></i> Multi-Tasking Mode Active</span>
+      <button class="device-btn btn-install-highlight" id="btnPwaInstallDesktop" title="Install to Mobile / Chrome" onclick="triggerPwaInstall()">
+        <i class="fa-solid fa-download"></i> Install App
+      </button>
       <button class="device-btn active" id="btnPhoneFrame" title="Phone Frame View">
         <i class="fa-solid fa-mobile"></i> Phone Mockup
       </button>
@@ -91,6 +103,22 @@
               <i class="fa-solid fa-magnifying-glass search-lens"></i>
               <span>Search apps, clients or policies...</span>
               <i class="fa-solid fa-microphone mic-icon"></i>
+            </div>
+
+            <!-- Install to Mobile Chrome Banner -->
+            <div class="pwa-install-banner" id="pwaInstallBanner" onclick="triggerPwaInstall()">
+              <div class="pwa-banner-left">
+                <div class="pwa-icon-glow">
+                  <i class="fa-solid fa-mobile-screen"></i>
+                </div>
+                <div>
+                  <strong>Install to Phone (Chrome PWA)</strong>
+                  <span>Click to add direct app icon to your Android Home Screen</span>
+                </div>
+              </div>
+              <button class="pwa-install-pill-btn">
+                <i class="fa-solid fa-arrow-down-to-line"></i> Install
+              </button>
             </div>
           </div>
 

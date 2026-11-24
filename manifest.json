@@ -1,0 +1,56 @@
+{
+  "name": "Smart Insurance Advisor OS",
+  "short_name": "InsuranceOS",
+  "description": "Mobile Multitasking Operating System for Insurance, Claims, Investment and Client Management",
+  "start_url": "./index.html",
+  "id": "/?source=pwa",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b1120",
+  "theme_color": "#0b1120",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Claim Center",
+      "short_name": "Claims",
+      "description": "Track and file hospital cashless claims",
+      "url": "./index.html#claims",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Investment & SIP",
+      "short_name": "Investment",
+      "description": "Manage AUM and start mutual fund SIPs",
+      "url": "./index.html#investment",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Commission Tracker",
+      "short_name": "Commission",
+      "description": "View monthly payouts and TDS slips",
+      "url": "./index.html#commission",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "categories": ["finance", "business", "productivity"],
+  "prefer_related_applications": false
+}

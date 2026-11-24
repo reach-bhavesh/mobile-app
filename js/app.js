@@ -1012,3 +1012,95 @@ function showToast(message) {
     toast.classList.remove('show');
   }, 2600);
 }
+
+// ==========================================================================
+// PWA (PROGRESSIVE WEB APP) SERVICE WORKER & DIRECT CHROME INSTALL ENGINE
+// ==========================================================================
+
+// Register Service Worker for PWA Offline & Installability Criteria
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then((reg) => {
+        console.log('[PWA] ServiceWorker registered with scope:', reg.scope);
+      })
+      .catch((err) => {
+        console.log('[PWA] ServiceWorker registration failed:', err);
+      });
+  });
+}
+
+// Global PWA Install Prompt Holder
+let deferredPwaPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Prevent default mini-infobar on mobile Chrome
+  e.preventDefault();
+  deferredPwaPrompt = e;
+  console.log('[PWA] beforeinstallprompt event captured');
+
+  // Highlight and show the install banner
+  const banner = document.getElementById('pwaInstallBanner');
+  if (banner) {
+    banner.style.display = 'flex';
+  }
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredPwaPrompt = null;
+  showToast('🎉 Smart Insurance OS Installed to Home Screen!');
+  const banner = document.getElementById('pwaInstallBanner');
+  if (banner) banner.style.display = 'none';
+});
+
+// Trigger Direct Install or Show Quick Step-by-Step Guide
+function triggerPwaInstall() {
+  if (deferredPwaPrompt) {
+    // Show Chrome's native install dialog
+    deferredPwaPrompt.prompt();
+    deferredPwaPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        showToast('Installing application to your device...');
+      } else {
+        showToast('Install cancelled.');
+      }
+      deferredPwaPrompt = null;
+    });
+  } else {
+    // Show interactive instructions modal for Chrome Mobile
+    openModal(
+      "Install App to Mobile Chrome",
+      "Add to your Android or iPhone Home Screen",
+      "fa-mobile-screen",
+      `
+      <div style="background: linear-gradient(135deg, #0b1120, #1e293b); color: #fff; border-radius: 14px; padding: 14px; margin-bottom: 14px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+          <i class="fa-brands fa-chrome text-primary" style="font-size: 22px; color: #38bdf8;"></i>
+          <strong style="font-size: 13.5px;">Google Chrome (Android) માં ઇન્સ્ટોલ કરો:</strong>
+        </div>
+        <ol style="font-size: 11.5px; line-height: 1.6; padding-left: 20px; color: #e2e8f0;">
+          <li>તમારા મોબાઇલ Chrome બ્રાઉઝરમાં ઉપર જમણી બાજુના <strong>3 ડૉટ્સ (⋮)</strong> મેનુ પર ક્લિક કરો.</li>
+          <li>મેનુમાં <strong>"Install app"</strong> અથવા <strong>"Add to Home screen" (હોમ સ્ક્રીન પર ઉમેરો)</strong> પર ટેપ કરો.</li>
+          <li>પછી <strong>"Install"</strong> પર ક્લિક કરો.</li>
+        </ol>
+      </div>
+
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 14px; margin-bottom: 14px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+          <i class="fa-brands fa-apple" style="font-size: 20px; color: #0f172a;"></i>
+          <strong style="font-size: 13px; color: #0f172a;">iPhone (Safari) માટે:</strong>
+        </div>
+        <p style="font-size: 11.5px; color: #64748b; line-height: 1.5;">
+          Safari માં નીચે આપેલા <strong>Share <i class="fa-solid fa-arrow-up-from-bracket"></i></strong> બટન પર ટેપ કરો અને <strong>"Add to Home Screen"</strong> સિલેક્ટ કરો.
+        </p>
+      </div>
+
+      <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 10px 12px; font-size: 11px; color: #065f46; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-circle-check" style="color: #10b981; font-size: 16px;"></i>
+        <span>ઇન્સ્ટોલ કર્યા પછી આ એપ તમારા ફોનના બધા ઓરિજિનલ એપ્લિકેશન્સની જેમ જ ફૂલ સ્ક્રીનમાં ઓપન થશે!</span>
+      </div>
+      `
+    );
+  }
+}
+
