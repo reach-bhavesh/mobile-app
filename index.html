@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="gu-IN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <title>Smart Insurance OS - Mobile Multi-App System</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="desktop-preview">
+
+  <!-- Desktop Top Control Bar -->
+  <header class="desktop-top-bar" id="desktopBar">
+    <div class="desktop-brand">
+      <i class="fa-solid fa-mobile-screen-button logo-icon"></i>
+      <span>Smart Advisor <strong>Mobile OS</strong> (Multi-App Switcher)</span>
+    </div>
+    <div class="device-controls">
+      <span class="preview-text"><i class="fa-solid fa-layer-group"></i> Multi-Tasking Mode Active</span>
+      <button class="device-btn active" id="btnPhoneFrame" title="Phone Frame View">
+        <i class="fa-solid fa-mobile"></i> Phone Mockup
+      </button>
+      <button class="device-btn" id="btnFullResponsive" title="Full Screen View">
+        <i class="fa-solid fa-expand"></i> Full Screen
+      </button>
+      <button class="device-btn" id="btnQuickSwitcher" title="App Switcher (Recents)">
+        <i class="fa-solid fa-table-cells-large"></i> Recents (Overview)
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Mobile App Shell / Device Wrapper -->
+  <div class="device-container" id="deviceContainer">
+    
+    <!-- Phone Mockup Outer Frame -->
+    <div class="phone-frame" id="phoneFrame">
+      
+      <!-- Phone Hardware Bezel / Island -->
+      <div class="phone-hardware">
+        <div class="notch-island">
+          <div class="camera-lens"></div>
+          <div class="speaker-slit"></div>
+        </div>
+      </div>
+
+      <!-- Phone App Screen Inner Window -->
+      <div class="mobile-screen" id="mobileScreen">
+        
+        <!-- Native Mobile Status Bar (Always on top) -->
+        <div class="status-bar" id="statusBar">
+          <div class="status-time" id="statusTime">18:24</div>
+          <div class="status-icons">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-brands fa-bluetooth-b"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <span class="battery-pct">84%</span>
+            <i class="fa-solid fa-battery-three-quarters battery-icon"></i>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             LAYER 1: HOME SCREEN (APP LAUNCHER GRID)
+             ============================================================== -->
+        <div class="os-home-screen" id="homeScreen">
+          
+          <!-- Wallpaper Watermark / Tech Theme -->
+          <div class="wallpaper-graphics">
+            <div class="cyber-shield-watermark">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="wallpaper-motto">THE WORLD OF TRUST</div>
+          </div>
+
+          <!-- Home Top Clock & Search Widget -->
+          <div class="home-widget-area">
+            <div class="widget-time" id="homeLargeClock">18:24</div>
+            <div class="widget-date" id="homeDate">Tuesday, 24 November</div>
+            
+            <!-- Google / Quick Search Bar on Home -->
+            <div class="home-search-pill" onclick="focusAppSearch()">
+              <i class="fa-solid fa-magnifying-glass search-lens"></i>
+              <span>Search apps, clients or policies...</span>
+              <i class="fa-solid fa-microphone mic-icon"></i>
+            </div>
+          </div>
+
+          <!-- Apps Grid (Launcher) -->
+          <div class="home-apps-grid">
+            
+            <!-- App 1: Client Management -->
+            <div class="app-icon-item" onclick="openApp('clients')">
+              <div class="app-icon bg-gradient-blue">
+                <i class="fa-solid fa-users"></i>
+              </div>
+              <span class="app-name">Clients</span>
+            </div>
+
+            <!-- App 2: Life Insurance -->
+            <div class="app-icon-item" onclick="openApp('life')">
+              <div class="app-icon bg-gradient-rose">
+                <i class="fa-solid fa-heart-pulse"></i>
+              </div>
+              <span class="app-name">Life Policy</span>
+            </div>
+
+            <!-- App 3: General Insurance -->
+            <div class="app-icon-item" onclick="openApp('general')">
+              <div class="app-icon bg-gradient-amber">
+                <i class="fa-solid fa-car-side"></i>
+              </div>
+              <span class="app-name">General Ins</span>
+            </div>
+
+            <!-- App 4: Investment & SIP -->
+            <div class="app-icon-item" onclick="openApp('investment')">
+              <div class="app-icon bg-gradient-teal">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <span class="app-name">Investment</span>
+            </div>
+
+            <!-- App 5: Claim Center -->
+            <div class="app-icon-item" onclick="openApp('claims')">
+              <div class="app-icon bg-gradient-red">
+                <i class="fa-solid fa-file-medical"></i>
+                <span class="app-badge">14</span>
+              </div>
+              <span class="app-name">Claims</span>
+            </div>
+
+            <!-- App 6: Commission Tracker -->
+            <div class="app-icon-item" onclick="openApp('commission')">
+              <div class="app-icon bg-gradient-emerald">
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+              </div>
+              <span class="app-name">Commission</span>
+            </div>
+
+            <!-- App 7: Sub Agent Network -->
+            <div class="app-icon-item" onclick="openApp('subagent')">
+              <div class="app-icon bg-gradient-purple">
+                <i class="fa-solid fa-network-wired"></i>
+              </div>
+              <span class="app-name">Sub Agent</span>
+            </div>
+
+            <!-- App 8: Document Vault -->
+            <div class="app-icon-item" onclick="openApp('documents')">
+              <div class="app-icon bg-gradient-yellow">
+                <i class="fa-solid fa-folder-closed"></i>
+              </div>
+              <span class="app-name">Documents</span>
+            </div>
+
+            <!-- App 9: Reports & MIS -->
+            <div class="app-icon-item" onclick="openApp('reports')">
+              <div class="app-icon bg-gradient-indigo">
+                <i class="fa-solid fa-chart-pie"></i>
+              </div>
+              <span class="app-name">Reports</span>
+            </div>
+
+            <!-- App 10: Smart Digital Connect (WhatsApp) -->
+            <div class="app-icon-item" onclick="openApp('smartconnect')">
+              <div class="app-icon bg-gradient-green">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span class="app-badge">5</span>
+              </div>
+              <span class="app-name">Smart Connect</span>
+            </div>
+
+            <!-- App 11: Endorsement & Alteration -->
+            <div class="app-icon-item" onclick="openApp('alteration')">
+              <div class="app-icon bg-gradient-orange">
+                <i class="fa-solid fa-pen-ruler"></i>
+              </div>
+              <span class="app-name">Alteration</span>
+            </div>
+
+            <!-- App 12: Settings & Masters -->
+            <div class="app-icon-item" onclick="openApp('settings')">
+              <div class="app-icon bg-gradient-slate">
+                <i class="fa-solid fa-gear"></i>
+              </div>
+              <span class="app-name">Settings</span>
+            </div>
+
+          </div>
+
+          <!-- Bottom Home Dock (Pinned Favorite Apps) -->
+          <div class="home-bottom-dock">
+            <div class="dock-app" onclick="openApp('clients')" title="Clients">
+              <div class="dock-icon bg-gradient-blue"><i class="fa-solid fa-users"></i></div>
+            </div>
+            <div class="dock-app" onclick="openApp('claims')" title="Claims">
+              <div class="dock-icon bg-gradient-red"><i class="fa-solid fa-file-medical"></i></div>
+            </div>
+            <div class="dock-app" onclick="openApp('investment')" title="Investment">
+              <div class="dock-icon bg-gradient-teal"><i class="fa-solid fa-chart-line"></i></div>
+            </div>
+            <div class="dock-app" onclick="openApp('smartconnect')" title="WhatsApp Connect">
+              <div class="dock-icon bg-gradient-green"><i class="fa-brands fa-whatsapp"></i></div>
+            </div>
+            <div class="dock-app" onclick="openApp('settings')" title="Settings">
+              <div class="dock-icon bg-gradient-slate"><i class="fa-solid fa-gear"></i></div>
+            </div>
+          </div>
+
+        </div> <!-- /homeScreen -->
+
+
+        <!-- ==============================================================
+             LAYER 2: RUNNING APPS WINDOWS CONTAINER
+             ============================================================== -->
+        <div class="apps-window-stage" id="appsWindowStage">
+
+          <!-- APP 1: CLAIM MANAGEMENT APP -->
+          <div class="app-window" id="appWindow-claims">
+            <div class="app-top-header bg-red-header">
+              <button class="app-back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+              <div class="app-header-title">
+                <h3>Claim Management</h3>
+                <span>14 Active Claims • ₹18.6L Settled</span>
+              </div>
+              <button class="app-action-btn" onclick="openNewClaimModal()"><i class="fa-solid fa-plus"></i></button>
+            </div>
+
+            <div class="app-inner-content">
+              <!-- KPI Row -->
+              <div class="kpi-three-grid">
+                <div class="kpi-mini-card kpi-red">
+                  <label>Active Claims</label>
+                  <strong id="activeClaimCount">14</strong>
+                  <span>6 Cashless Hosp.</span>
+                </div>
+                <div class="kpi-mini-card kpi-green">
+                  <label>Claim Ratio</label>
+                  <strong>98.4%</strong>
+                  <span>Settlement Rate</span>
+                </div>
+                <div class="kpi-mini-card kpi-blue">
+                  <label>Avg Turnaround</label>
+                  <strong>48 Hrs</strong>
+                  <span>TPA Approved</span>
+                </div>
+              </div>
+
+              <!-- Quick Switch Tab within App -->
+              <div class="app-sub-tabs">
+                <button class="sub-tab-btn active" onclick="filterClaimTab('all', this)">All (14)</button>
+                <button class="sub-tab-btn" onclick="filterClaimTab('cashless', this)">Hospital Cashless</button>
+                <button class="sub-tab-btn" onclick="filterClaimTab('motor', this)">Motor Survey</button>
+                <button class="sub-tab-btn" onclick="filterClaimTab('death', this)">Death Claim</button>
+              </div>
+
+              <!-- Claims Stream List -->
+              <div class="claims-feed-list" id="claimsFeedList">
+                <!-- Dynamically generated items -->
+              </div>
+            </div>
+          </div>
+
+          <!-- APP 2: INVESTMENT & SIP APP -->
+          <div class="app-window" id="appWindow-investment">
+            <div class="app-top-header bg-teal-header">
+              <button class="app-back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+              <div class="app-header-title">
+                <h3>Investment & SIP Hub</h3>
+                <span>AUM: ₹3.85 Cr • Monthly SIP: ₹12.4L</span>
+              </div>
+              <button class="app-action-btn" onclick="openStartSIPModal()"><i class="fa-solid fa-circle-plus"></i></button>
+            </div>
+
+            <div class="app-inner-content">
+              <!-- AUM Banner Card -->
+              <div class="wealth-banner-card">
+                <div class="wealth-tag">TOTAL MUTUAL FUND AUM</div>
+                <h2 class="wealth-amount">₹3,84,52,190</h2>
+                <div class="wealth-metrics">
+                  <span><i class="fa-solid fa-arrow-trend-up"></i> +21.4% Avg XIRR</span>
+                  <span>Active SIPs: <strong>318</strong></span>
+                </div>
+              </div>
+
+              <!-- Mutual Fund Categories -->
+              <div class="section-title-clean">
+                <h4>Top Performing Portfolios</h4>
+                <button class="btn-clean-link" onclick="openStartSIPModal()">+ Add SIP</button>
+              </div>
+
+              <div class="portfolio-list" id="portfolioListContainer">
+                <!-- Dynamically rendered -->
+              </div>
+            </div>
+          </div>
+
+          <!-- APP 3: LIFE INSURANCE APP -->
+          <div class="app-window" id="appWindow-life">
+            <div class="app-top-header bg-rose-header">
+              <button class="app-back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+              <div class="app-header-title">
+                <h3>Life Insurance</h3>
+                <span>520 Active Policies • ₹120 Cr Covered</span>
+              </div>
+              <button class="app-action-btn" onclick="openAddPolicyModal('life')"><i class="fa-solid fa-plus"></i></button>
+            </div>
+
+            <div class="app-inner-content">
+              <!-- Category Filter Chips -->
+              <div class="filter-chips-row">
+                <button class="filter-chip active" onclick="filterLifePlans('all', this)">All Plans (520)</button>
+                <button class="filter-chip" onclick="filterLifePlans('term', this)">Term Life (324)</button>
+                <button class="filter-chip" onclick="filterLifePlans('endowment', this)">Endowment (142)</button>
+                <button class="filter-chip" onclick="filterLifePlans('ulip', this)">ULIP (54)</button>
+              </div>
+
+              <!-- Life Policy Feed -->
+              <div class="policies-feed" id="lifePoliciesFeed">
+                <!-- Dynamically rendered -->
+              </div>
+            </div>
+          </div>
+
+          <!-- APP 4: GENERAL INSURANCE APP -->
+          <div class="app-window" id="appWindow-general">
+            <div class="app-top-header bg-amber-header">
+              <button class="app-back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+              <div class="app-header-title">
+                <h3>General Insurance</h3>
+                <span>395 Motor, Health & Commercial Policies</span>
+              </div>
+              <button class="app-action-btn" onclick="openAddPolicyModal('general')"><i class="fa-solid fa-plus"></i></button>
+            </div>
+
+            <div class="app-inner-content">
+              <div class="filter-chips-row">
+                <button class="filter-chip active" onclick="filterGeneralPlans('all', this)">All General</button>
+                <button class="filter-chip" onclick="filterGeneralPlans('health', this)">Mediclaim Health</button>
+                <button class="filter-chip" onclick="filterGeneralPlans('motor', this)">Car & 2W</button>
+                <button class="filter-chip" onclick="filterGeneralPlans('fire', this)">Fire & Marine</button>
+              </div>
+
+              <div class="policies-feed" id="generalPoliciesFeed">
+                <!-- Dynamically rendered -->
+              </div>
+            </div>
+          </div>
+
+          <!-- APP 5: CLIENT MANAGEMENT APP -->
+          <div class="app-window" id="appWindow-clients">
+            <div class="app-top-header bg-blue-header">
+              <button class="app-back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+              <div class="app-header-title">
+                <h3>Client CRM</h3>
+                <span>1,428 Registered Clients & Families</span>
+              </div>
+              <button class="app-action-btn" onclick="openAddClientDialog()"><i class="fa-solid fa-user-plus"></i></button>
+            </div>
+
+            <div class="app-inner-content">
+              <div class="app-search-input-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="appClientSearch" placeholder="Search by name, phone or city..." onkeyup="searchClientsApp(this.value)">
+              </div>
+
+              <div class="clients-feed" id="appClientsFeed">
+                <!-- Dynamically rendered -->
+              </div>
+            </div>
+          </div>
+
+          <!-- APP 6: COMMISSION TRACKER APP -->
+          <div class="app-window" id="appWindow-commission">
+            <div class="app-top-header bg-emerald-header">
+              <button class="app-back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+              <div class="app-header-title">
+                <h3>Commission & Payouts</h3>
+                <span>November Payout: ₹2,84,500</span>
+              </div>
+              <button class="app-action-btn" onclick="downloadPayoutSlip()"><i class="fa-solid fa-download"></i></button>
+            </div>
+
+            <div class="app-inner-content">
+              <div class="commission-hero-card">
+                <span class="hero-sub">THIS MONTH EARNINGS</span>
+                <h2 class="hero-val">₹2,84,500</h2>
+                <div class="hero-split">
+                  <div>TDS (5%): <strong>₹14,225</strong></div>
+                  <div>Net Credited: <strong class="text-green-300">₹2,70,275</strong></div>
+                </div>
+              </div>
+
+              <div class="commission-details-list">
+                <div class="comm-item">
+                  <div class="comm-left">
+                    <div class="comm-icon bg-green-100 text-green-700"><i class="fa-solid fa-shield"></i></div>
+                    <div>
+                      <h5>First Year Commission (FYC)</h5>
+                      <span>24 new policies booked</span>
+                    </div>
+                  </div>
+                  <strong class="comm-val text-green-600">₹1,76,200</strong>
+                </div>
+
+                <div class="comm-item">
+                  <div class="comm-left">
+                    <div class="comm-icon bg-blue-100 text-blue-700"><i class="fa-solid fa-rotate"></i></div>
+                    <div>
+                      <h5>Renewal Commission (RC)</h5>
+                      <span>142 renewal premiums paid</span>
+                    </div>
+                  </div>
+                  <strong class="comm-val text-blue-600">₹68,300</strong>
+                </div>
+
+                <div class="comm-item">
+                  <div class="comm-left">
+                    <div class="comm-icon bg-purple-100 text-purple-700"><i class="fa-solid fa-network-wired"></i></div>
+                    <div>
+                      <h5>Sub-Agent Override Bonus</h5>
+                      <span>16 POSP team contribution</span>
+                    </div>
+                  </div>
+                  <strong class="comm-val text-purple-600">₹40,000</strong>
+                </div>
+              </div>
+
+              <button class="btn-block-action bg-emerald-600" onclick="downloadPayoutSlip()">
+                <i class="fa-solid fa-file-invoice-dollar"></i> Download Detailed TDS & Payout Slip
+              </button>
+            </div>
+          </div>
+
+          <!-- APP 7: REPORTS & MIS APP -->
+          <div class="app-window" id="appWindow-reports">
+            <div class="app-top-header bg-indigo-header">
+              <button class="app-back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+              <div class="app-header-title">
+                <h3>Reports & Analytics</h3>
+                <span>Business MIS, Target & Ledger</span>
+              </div>
+              <button class="app-action-btn" onclick="downloadMISReport()"><i class="fa-solid fa-file-pdf"></i></button>
+            </div>
+
+            <div class="app-inner-content">
+              <!-- Target Card -->
+              <div class="report-target-card">
+                <div class="target-head-clean">
+                  <div>
+                    <label>MDRT 2026 Target Track</label>
+                    <h4>₹12,00,000 Commission</h4>
+                  </div>
+                  <span class="badge-target">78% Done</span>
+                </div>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar-fill" style="width: 78%;"></div>
+                </div>
+                <div class="target-splits">
+                  <span>Achieved: <strong>₹9,36,000</strong></span>
+                  <span>Gap: <strong class="text-amber-300">₹2,64,000</strong></span>
+                </div>
+              </div>
+
+              <!-- Reports Quick Grid -->
+              <div class="reports-tile-grid">
+                <div class="report-tile" onclick="generateReport('business_mis')">
+                  <i class="fa-solid fa-chart-column text-blue-500"></i>
+                  <span>Business MIS</span>
+                </div>
+                <div class="report-tile" onclick="generateReport('due_register')">
+                  <i class="fa-solid fa-calendar-xmark text-red-500"></i>
+                  <span>Due Register</span>
+                </div>
+                <div class="report-tile" onclick="generateReport('lapse_book')">
+                  <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
+                  <span>Lapse Register</span>
+                </div>
+                <div class="report-tile" onclick="generateReport('subagent_mis')">
+                  <i class="fa-solid fa-users-gear text-purple-500"></i>
+                  <span>Sub-Agent MIS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- APP 8: DOCUMENT VAULT APP -->
+          <div class="app-window" id="appWindow-documents">
+            <div class="app-top-header bg-yellow-header">
+              <button class="app-back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+              <div class="app-header-title">
+                <h3>Document Vault</h3>
+                <span>e-Policies, KYC, Aadhaar & PAN</span>
+              </div>
+              <button class="app-action-btn" onclick="showToast('Upload scanned proposal...')"><i class="fa-solid fa-cloud-arrow-up"></i></button>
+            </div>
+
+            <div class="app-inner-content">
+              <div class="doc-tiles-grid">
+                <div class="doc-card" onclick="showToast('Opening 915 Policy Bonds archive...')">
+                  <i class="fa-solid fa-file-pdf text-red-500"></i>
+                  <h4>Policy Bonds</h4>
+                  <span>915 Downloadable PDFs</span>
+                </div>
+                <div class="doc-card" onclick="showToast('Opening 1,428 Verified KYC Cards...')">
+                  <i class="fa-solid fa-id-card text-blue-500"></i>
+                  <h4>KYC Documents</h4>
+                  <span>1,428 Aadhaar / PAN</span>
+                </div>
+                <div class="doc-card" onclick="showToast('Opening Medical Reports...')">
+                  <i class="fa-solid fa-notes-medical text-green-500"></i>
+                  <h4>Medical Reports</h4>
+                  <span>MER, ECG, Blood tests</span>
+                </div>
+                <div class="doc-card" onclick="showToast('Opening Endorsements...')">
+                  <i class="fa-solid fa-stamp text-amber-500"></i>
+                  <h4>Endorsements</h4>
+                  <span>Name/Nominee letters</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- APP 9: SMART DIGITAL CONNECT (WhatsApp) -->
+          <div class="app-window" id="appWindow-smartconnect">
+            <div class="app-top-header bg-green-header">
+              <button class="app-back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+              <div class="app-header-title">
+                <h3>Smart Digital Connect</h3>
+                <span>1-Click WhatsApp Reminders & Greetings</span>
+              </div>
+              <button class="app-action-btn" onclick="showToast('Ready to broadcast')"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+
+            <div class="app-inner-content">
+              <div class="whatsapp-hero-banner">
+                <i class="fa-brands fa-whatsapp wa-logo-huge"></i>
+                <h4>Instant WhatsApp Automation</h4>
+                <p>Send branded payment links with IRDAI compliant templates directly to client chats.</p>
+              </div>
+
+              <div class="wa-action-list">
+                <button class="wa-action-card" onclick="sendBroadcast('renewals')">
+                  <div class="wa-icon-box bg-red-100 text-red-600"><i class="fa-solid fa-bell"></i></div>
+                  <div class="wa-text-box">
+                    <strong>Send Urgent Renewal Reminders</strong>
+                    <span>5 clients due in next 7 days</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right wa-arr"></i>
+                </button>
+
+                <button class="wa-action-card" onclick="sendBroadcast('festive')">
+                  <div class="wa-icon-box bg-amber-100 text-amber-600"><i class="fa-solid fa-cake-candles"></i></div>
+                  <div class="wa-text-box">
+                    <strong>Birthday & Festival Greetings</strong>
+                    <span>Customized with your photo & agency code</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right wa-arr"></i>
+                </button>
+
+                <button class="wa-action-card" onclick="sendBroadcast('tax_saving')">
+                  <div class="wa-icon-box bg-blue-100 text-blue-600"><i class="fa-solid fa-calculator"></i></div>
+                  <div class="wa-text-box">
+                    <strong>Section 80C & 80D Tax Saving Campaign</strong>
+                    <span>Send to all 1,428 clients</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right wa-arr"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- APP 10: SUB AGENT NETWORK -->
+          <div class="app-window" id="appWindow-subagent">
+            <div class="app-top-header bg-purple-header">
+              <button class="app-back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+              <div class="app-header-title">
+                <h3>Sub-Agent Network</h3>
+                <span>16 POSP Agents • Hierarchy & Payouts</span>
+              </div>
+              <button class="app-action-btn" onclick="showToast('Opening Sub-Agent Onboarding...')"><i class="fa-solid fa-user-plus"></i></button>
+            </div>
+
+            <div class="app-inner-content">
+              <div class="agent-hierarchy-list" id="agentHierarchyContainer">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+
+          <!-- APP 11: SETTINGS & MASTERS -->
+          <div class="app-window" id="appWindow-settings">
+            <div class="app-top-header bg-slate-header">
+              <button class="app-back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+              <div class="app-header-title">
+                <h3>System Settings</h3>
+                <span>Bhavesh Bhai Patel • AGY-884012</span>
+              </div>
+              <button class="app-action-btn" onclick="showToast('Settings saved')"><i class="fa-solid fa-check"></i></button>
+            </div>
+
+            <div class="app-inner-content">
+              <div class="settings-group-label">PREFERENCES</div>
+              <div class="settings-list-card">
+                <div class="setting-item-row" onclick="toggleDarkMode()">
+                  <div class="s-left"><i class="fa-solid fa-moon"></i> <span>Dark Theme</span></div>
+                  <i class="fa-solid fa-toggle-on text-primary" style="font-size: 20px;"></i>
+                </div>
+                <div class="setting-item-row" onclick="showToast('Language set to Gujarati / English')">
+                  <div class="s-left"><i class="fa-solid fa-language"></i> <span>Language (ગુજરાતી / English)</span></div>
+                  <span class="text-muted text-xs">Active</span>
+                </div>
+                <div class="setting-item-row" onclick="showToast('Biometric Fingerprint enabled')">
+                  <div class="s-left"><i class="fa-solid fa-fingerprint"></i> <span>App Lock & Biometrics</span></div>
+                  <span class="text-muted text-xs">Enabled</span>
+                </div>
+              </div>
+
+              <div class="settings-group-label">EXTERNAL COMPANY PORTALS</div>
+              <div class="settings-list-card">
+                <div class="setting-item-row" onclick="showToast('Opening LIC Merchant Portal...')">
+                  <div class="s-left"><i class="fa-solid fa-building text-blue-500"></i> <span>LIC of India Portal</span></div>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-muted"></i>
+                </div>
+                <div class="setting-item-row" onclick="showToast('Opening HDFC Life Advisor Portal...')">
+                  <div class="s-left"><i class="fa-solid fa-shield text-red-500"></i> <span>HDFC Life Connect</span></div>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-muted"></i>
+                </div>
+                <div class="setting-item-row" onclick="showToast('Opening Star Health Atom Portal...')">
+                  <div class="s-left"><i class="fa-solid fa-hospital text-green-500"></i> <span>Star Health Atom Login</span></div>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-muted"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- /appsWindowStage -->
+
+
+        <!-- ==============================================================
+             LAYER 3: MULTITASKING APP SWITCHER / RECENTS (Screenshot 2 Clone!)
+             ============================================================== -->
+        <div class="recents-switcher-overlay" id="recentsSwitcherOverlay">
+          
+          <!-- Background Wallpaper with Blur -->
+          <div class="recents-backdrop-blur">
+            <div class="recents-watermark">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>THE WORLD OF TRUST</span>
+            </div>
+          </div>
+
+          <!-- Header of Recents -->
+          <div class="recents-header-bar">
+            <span class="recents-title">Recent Tasks</span>
+            <span class="recents-hint">Swipe cards horizontally • Tap to switch</span>
+          </div>
+
+          <!-- Carousel / Swiper Track for Running Apps -->
+          <div class="recents-cards-track" id="recentsCardsTrack">
+            <!-- Dynamically populated with open apps cards (like Spotify & Settings in Screenshot 2) -->
+          </div>
+
+          <!-- "Close all" Action Button (Exact replica of Screenshot 2!) -->
+          <div class="recents-bottom-actions">
+            <button class="btn-close-all" id="btnCloseAllApps" onclick="closeAllApps()">
+              Close all
+            </button>
+          </div>
+
+          <!-- Bottom Frequent App Icons Row (Exact like Screenshot 2) -->
+          <div class="recents-dock-strip" id="recentsDockStrip">
+            <div class="dock-mini-icon bg-gradient-red" onclick="openApp('claims')" title="Claims">
+              <i class="fa-solid fa-file-medical"></i>
+            </div>
+            <div class="dock-mini-icon bg-gradient-teal" onclick="openApp('investment')" title="Investment">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div class="dock-mini-icon bg-gradient-green" onclick="openApp('smartconnect')" title="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <div class="dock-mini-icon bg-gradient-blue" onclick="openApp('clients')" title="Clients">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="dock-mini-icon bg-gradient-slate" onclick="openApp('settings')" title="Settings">
+              <i class="fa-solid fa-gear"></i>
+            </div>
+          </div>
+
+        </div> <!-- /recentsSwitcherOverlay -->
+
+
+        <!-- ==============================================================
+             LAYER 4: NATIVE SYSTEM NAVIGATION BAR (Android 3-Button Style)
+             ============================================================== -->
+        <nav class="system-nav-bar" id="systemNavBar">
+          
+          <!-- Recents / App Switcher Button (||| or Square) -->
+          <button class="sys-nav-btn" id="sysNavRecents" onclick="toggleAppSwitcher()" title="Recents / App Switcher">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <!-- Home Button (Circle) -->
+          <button class="sys-nav-btn home-circle-btn" id="sysNavHome" onclick="goHome()" title="Home Screen">
+            <div class="home-circle-inner"></div>
+          </button>
+
+          <!-- Back Button (Chevron) -->
+          <button class="sys-nav-btn" id="sysNavBack" onclick="goBack()" title="Back">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+
+        </nav>
+
+        <!-- Toast Notifications -->
+        <div class="toast-message" id="toastMessage">
+          <i class="fa-solid fa-circle-check"></i>
+          <span id="toastText">Action completed</span>
+        </div>
+
+      </div> <!-- /mobile-screen -->
+    </div> <!-- /phone-frame -->
+  </div> <!-- /device-container -->
+
+  <!-- Universal Action Modal (For Adding Client, Claim, SIP, etc.) -->
+  <div class="modal-backdrop" id="universalModalBackdrop" onclick="closeUniversalModal(event)">
+    <div class="universal-modal-dialog" id="universalModalDialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-bubble" id="modalIconBubble"><i class="fa-solid fa-briefcase"></i></div>
+          <div>
+            <h3 class="modal-title" id="modalTitle">Modal Title</h3>
+            <span class="modal-sub" id="modalSubtitle">Sub information</span>
+          </div>
+        </div>
+        <button class="btn-close-modal" onclick="closeUniversalModalDirect()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript Application Script -->
+  <script src="js/app.js"></script>
+</body>
+</html>
